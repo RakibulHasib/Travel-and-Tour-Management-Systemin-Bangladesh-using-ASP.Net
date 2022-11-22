@@ -1,0 +1,75 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TTMSB_Project.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title><%: Page.Title %></title>
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-3.6.1.js"></script>
+    <link href="/Content/font-awesome.css" rel="stylesheet" />
+    <script src="/crystalreportviewers13/js/crviewer/crv.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+
+    <form id="form1" runat="server">
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" href="#"><i class="fa fa-plane"></i></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse col" id="navbarNavAltMarkup">
+                    <div class="navbar-nav col-8">
+                        <a class="nav-item nav-link active text-white" href="/default.aspx">Home</a>
+                        <a class="nav-item nav-link text-white" href="/Items/ClientView.aspx">Client</a>
+                        <a class="nav-item nav-link text-white" href="/Items/BookkingDetails.aspx">Booking Details</a>
+                        <a class="nav-item nav-link text-white" href="/Items/BookingDetailsView.aspx">Report</a>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Others</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/Items/Hotel.aspx">Hotel</a>
+                                <a class="dropdown-item" href="/Items/spot.aspx">Spot</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/Items/Transportation.aspx">Transportation</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="navbar-nav col-4">
+                        <%
+                            if (Request.IsAuthenticated)
+                            {
+                        %>
+                        <a class="nav-item nav-link text-white" href="#">Hi <%=Page.User.Identity.Name %></a>
+                        <asp:LinkButton ID="logout" runat="server" CssClass="nav-link text-white" OnClick="logout_Click" CausesValidation="false">Logout</asp:LinkButton>
+                        <a class="nav-item nav-link text-white" href="ManagePassword.aspx"><i class="fa fa-user" aria-hidden="true"></i>Manage</a>
+                        <%
+                            }
+                            else
+                            {
+                        %>
+                        <a class="nav-item nav-link text-white" href="frmRegisteraspx.aspx">Register</a>
+                        <a class="nav-item nav-link text-white" href="Login.aspx">Login</a>
+                        <%
+                            }
+                        %>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <asp:ContentPlaceHolder ID="main" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div class="container-fluid">
+            <p class="text-center">&copy;<%: DateTime.Now.Year %>-www.ttmsb-bd.com</p>
+        </div>
+    </form>
+    <asp:ContentPlaceHolder ID="footer" runat="server">
+    </asp:ContentPlaceHolder>
+    <script src="/Scripts/bootstrap.js"></script>
+</body>
+</html>
